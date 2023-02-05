@@ -1,0 +1,32 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:15
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DATABASE=postgres
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  moreload:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    env_file:
+      - .env.local
+    volumes:
+      - '$PWD/uploads:/moreload/uploads'
+      - '$PWD/public:/moreload/public'
+    depends_on:
+      - 'postgres'
+
+volumes:
+  pg_data:

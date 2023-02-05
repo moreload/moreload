@@ -1,0 +1,51 @@
+name: 'Push Release Docker Images'
+
+on:
+  push:
+    tags: 
+      - 'v*.*.*'
+    paths:
+      - 'src/**'
+      - 'server/**'
+      - 'prisma/**'
+      - '.github/**'
+      - 'Dockerfile'
+  workflow_dispatch:
+
+jobs:
+  push_to_ghcr:
+    name: Push Release Image to GitHub Packages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v3
+
+      - name: Get version
+        id: version
+        run: |
+          echo "moreload_version=$(jq .version package.json -r)" >> $GITHUB_OUTPUT
+
+      - name: Setup QEMU
+        uses: docker/setup-qemu-action@v2
+
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Login to Github Packages
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build Docker Image
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          platforms: linux/amd64,linux/arm64
+          tags: |
+            ghcr.io/dyonc/moreload:latest
+            ghcr.io/dyonc/moreload:${{ steps.version.outputs.moreload_version }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max

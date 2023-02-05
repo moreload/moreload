@@ -1,0 +1,7 @@
+node_modules/
+.next/
+uploads/
+.git/
+.yarn/*
+!.yarn/releases
+!.yarn/plugins
