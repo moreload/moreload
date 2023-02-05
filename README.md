@@ -1,12 +1,12 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/moreload/moreload/trunk/public/moreload_small.png"/>
+  <img src="https://raw.githubusercontent.com/moreload/moreload/main/public/moreload_small.png"/>
 
 A ShareX/file upload server that is easy to use, packed with features, and with an easy setup!
 
 ![Stars](https://img.shields.io/github/stars/moreload/moreload?logo=github&style=flat)
 ![Version](https://img.shields.io/github/package-json/v/moreload/moreload?logo=git&logoColor=white&style=flat)
 ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/moreload/moreload/trunk?logo=git&logoColor=white&style=flat)
-[![Discord](https://img.shields.io/discord/729771078196527176?color=%23777ed3&label=discord&logo=discord&logoColor=white&style=flat)](https://discord.gg/EAhCRfGxCF)
+[![Discord](https://img.shields.io/discord/729771078196527176?color=%23777ed3&label=discord&logo=discord&logoColor=white&style=flat)](https://discord.gg/3mZduBCcH4)
 
 ![Build](https://img.shields.io/github/actions/workflow/status/moreload/moreload/build.yml?logo=github&style=flat&branch=trunk)
 [![Docker Image (trunk)](https://img.shields.io/github/actions/workflow/status/moreload/moreload/docker.yml?label=Docker%20%28trunk%29&logo=github&style=flat&branch=trunk)](https://github.com/moreload/moreload/pkgs/container/moreload/?tag=trunk)
