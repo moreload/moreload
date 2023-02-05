@@ -1,16 +1,16 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/dyonc/moreload/trunk/public/moreload_small.png"/>
+  <img src="https://raw.githubusercontent.com/moreload/moreload/trunk/public/moreload_small.png"/>
 
 A ShareX/file upload server that is easy to use, packed with features, and with an easy setup!
 
-![Stars](https://img.shields.io/github/stars/dyonc/moreload?logo=github&style=flat)
-![Version](https://img.shields.io/github/package-json/v/dyonc/moreload?logo=git&logoColor=white&style=flat)
-![GitHub last commit (branch)](https://img.shields.io/github/last-commit/dyonc/moreload/trunk?logo=git&logoColor=white&style=flat)
+![Stars](https://img.shields.io/github/stars/moreload/moreload?logo=github&style=flat)
+![Version](https://img.shields.io/github/package-json/v/moreload/moreload?logo=git&logoColor=white&style=flat)
+![GitHub last commit (branch)](https://img.shields.io/github/last-commit/moreload/moreload/trunk?logo=git&logoColor=white&style=flat)
 [![Discord](https://img.shields.io/discord/729771078196527176?color=%23777ed3&label=discord&logo=discord&logoColor=white&style=flat)](https://discord.gg/EAhCRfGxCF)
 
-![Build](https://img.shields.io/github/actions/workflow/status/dyonc/moreload/build.yml?logo=github&style=flat&branch=trunk)
-[![Docker Image (trunk)](https://img.shields.io/github/actions/workflow/status/dyonc/moreload/docker.yml?label=Docker%20%28trunk%29&logo=github&style=flat&branch=trunk)](https://github.com/dyonc/moreload/pkgs/container/moreload/?tag=trunk)
-[![Docker Image (release)](https://img.shields.io/github/actions/workflow/status/dyonc/moreload/docker-release.yml?label=Docker%20%28release%29&logo=github&style=flat&branch=trunk)](https://github.com/dyonc/moreload/pkgs/container/moreload/?tag=latest)
+![Build](https://img.shields.io/github/actions/workflow/status/moreload/moreload/build.yml?logo=github&style=flat&branch=trunk)
+[![Docker Image (trunk)](https://img.shields.io/github/actions/workflow/status/moreload/moreload/docker.yml?label=Docker%20%28trunk%29&logo=github&style=flat&branch=trunk)](https://github.com/moreload/moreload/pkgs/container/moreload/?tag=trunk)
+[![Docker Image (release)](https://img.shields.io/github/actions/workflow/status/moreload/moreload/docker-release.yml?label=Docker%20%28release%29&logo=github&style=flat&branch=trunk)](https://github.com/moreload/moreload/pkgs/container/moreload/?tag=latest)
 
 </div>
 
@@ -54,7 +54,7 @@ A ShareX/file upload server that is easy to use, packed with features, and with 
 This section requires [Docker](https://docs.docker.com/get-docker/) and [docker-compose](https://docs.docker.com/compose/install/).
 
 ```shell
-git clone https://github.com/dyonc/moreload
+git clone https://github.com/moreload/moreload
 cd moreload
 
 docker-compose up -d
@@ -70,7 +70,7 @@ Ways you could generate the string could be from a password managers generator, 
 This section requires [nodejs](https://nodejs.org), [yarn](https://yarnpkg.com/) or [npm](https://npmjs.com).
 
 ```shell
-git clone https://github.com/dyonc/moreload
+git clone https://github.com/moreload/moreload
 cd moreload
 
 # npm install

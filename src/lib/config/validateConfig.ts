@@ -124,7 +124,7 @@ const validator = s.object({
           })
         )
         .default([
-          { label: 'MoreLoad', link: 'https://github.com/dyonc/moreload' },
+          { label: 'MoreLoad', link: 'https://github.com/moreload/moreload' },
           { label: 'Documentation', link: 'https://moreload.com/' },
         ]),
     })
@@ -135,7 +135,7 @@ const validator = s.object({
       disable_media_preview: false,
 
       external_links: [
-        { label: 'MoreLoad', link: 'https://github.com/dyonc/moreload' },
+        { label: 'MoreLoad', link: 'https://github.com/moreload/moreload' },
         { label: 'Documentation', link: 'https://moreload.com/' },
       ],
     }),
@@ -144,7 +144,7 @@ const validator = s.object({
       url: s.string,
       username: s.string.default('MoreLoad'),
       avatar_url: s.string.default(
-        'https://raw.githubusercontent.com/dyonc/moreload/9b60147e112ec5b70170500b85c75ea621f41d03/public/moreload.png'
+        'https://raw.githubusercontent.com/moreload/moreload/9b60147e112ec5b70170500b85c75ea621f41d03/public/moreload.png'
       ),
       upload: discord_content,
       shorten: discord_content,

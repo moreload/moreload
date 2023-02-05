@@ -17,8 +17,8 @@ body:
       label: Version
       description: What version of MoreLoad are you using?
       options:
-        - upstream (ghcr.io/dyonc/moreload:trunk)
-        - latest (ghcr.io/dyonc/moreload:latest)
+        - upstream (ghcr.io/moreload/moreload:trunk)
+        - latest (ghcr.io/moreload/moreload:latest)
         - other (provide version in additional info)
     validations:
       required: true

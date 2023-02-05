@@ -44,7 +44,7 @@ jobs:
           push: true
           platforms: linux/amd64,linux/arm64
           tags: |
-            ghcr.io/dyonc/moreload:trunk
-            ghcr.io/dyonc/moreload:trunk-${{ steps.version.outputs.moreload_version }}
+            ghcr.io/moreload/moreload:trunk
+            ghcr.io/moreload/moreload:trunk-${{ steps.version.outputs.moreload_version }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
