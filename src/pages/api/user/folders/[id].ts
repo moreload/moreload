@@ -1,3 +1,4 @@
+import config from 'lib/config';
 import Logger from 'lib/logger';
 import prisma from 'lib/prisma';
 import { formatRootUrl } from 'lib/utils/urls';
