@@ -35,7 +35,7 @@ A ShareX/file upload server that is easy to use, packed with features, and with 
 - User invites
 - File Chunking (for large files)
 - File deletion once it reaches a certain amount of views
-- Easy setup instructions on [docs](https://zipl.vercel.app/) (One command install `docker-compose up -d`)
+- Easy setup instructions on [docs](https://moreload.vercel.app/) (One command install `docker-compose up -d`)
 
 <details>
   <summary><h2>Screenshots (click)</h2></summary>
@@ -108,7 +108,7 @@ The default port is `3000`, once you have accessed it you can see a login screen
 
 This section requires [ShareX](https://www.getsharex.com/).
 
-After navigating to MoreLoad, click on the top right corner where it says your username and click Manage Account. Scroll down to see "ShareX Config", select the one you would prefer using. After this you can import the .sxcu into sharex. [More information here](https://zipl.vercel.app/docs/guides/uploaders/sharex)
+After navigating to MoreLoad, click on the top right corner where it says your username and click Manage Account. Scroll down to see "ShareX Config", select the one you would prefer using. After this you can import the .sxcu into sharex. [More information here](https://moreload.vercel.app/docs/guides/uploaders/sharex)
 
 # Flameshot (Linux)
 
