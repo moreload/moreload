@@ -8,7 +8,7 @@ import { createInvisURL, randomChars } from 'lib/util';
 const logger = Logger.get('shorten');
 
 async function handler(req: NextApiReq, res: NextApiRes) {
-  if (!req.headers.authorization) return res.badRequest('no authorization');
+  if (!req.headers.authorization) return res.forbidden('no authorization');
 
   const user = await prisma.user.findFirst({
     where: {
@@ -60,14 +60,13 @@ async function handler(req: NextApiReq, res: NextApiRes) {
   if (req.headers['override-domain']) {
     domain = `${zconfig.core.return_https ? 'https' : 'http'}://${req.headers['override-domain']}`;
   } else if (user.domains.length) {
-    const randomDomain = user.domains[Math.floor(Math.random() * user.domains.length)];
-    domain = `${zconfig.core.return_https ? 'https' : 'http'}://${randomDomain}`;
+    domain = user.domains[Math.floor(Math.random() * user.domains.length)];
   } else {
     domain = `${zconfig.core.return_https ? 'https' : 'http'}://${req.headers.host}`;
   }
 
-  const responseUrl = `${domain}${zconfig.uploader.route === '/' ? '/' : zconfig.uploader.route}${
-    req.body.vanity ? req.body.vanity : invis ? invis.invis : url.id
+  const responseUrl = `${domain}${zconfig.urls.route === '/' ? '/' : zconfig.urls.route + '/'}${
+    req.body.vanity ? encodeURI(req.body.vanity) : invis ? invis.invis : url.id
   }`;
 
   if (config.discord?.shorten) {
