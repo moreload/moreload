@@ -1,4 +1,16 @@
-import { Alert, Box, Button, Card, Center, Group, Image, LoadingOverlay, Text } from '@mantine/core';
+import exts from 'lib/exts';
+import {
+  Alert,
+  Box,
+  Button,
+  Card,
+  Center,
+  Group,
+  Image,
+  LoadingOverlay,
+  Text,
+  UnstyledButton,
+} from '@mantine/core';
 import { useEffect, useState } from 'react';
 import { AudioIcon, FileIcon, ImageIcon, PlayIcon } from './icons';
 import KaTeX from './render/KaTeX';
@@ -15,6 +27,15 @@ function PlaceholderContent({ text, Icon }) {
 }
 
 function Placeholder({ text, Icon, ...props }) {
+  if (props.onClick)
+    return (
+      <UnstyledButton sx={{ height: 200 }} {...props}>
+        <Center sx={{ height: 200 }}>
+          <PlaceholderContent text={text} Icon={Icon} />
+        </Center>
+      </UnstyledButton>
+    );
+
   return (
     <Box sx={{ height: 200 }} {...props}>
       <Center sx={{ height: 200 }}>
@@ -35,10 +56,11 @@ export default function Type({ file, popup = false, disableMediaPreview, ...prop
   const [text, setText] = useState('');
   const shouldRenderMarkdown = file.name.endsWith('.md');
   const shouldRenderTex = file.name.endsWith('.tex');
+  const shouldRenderCode: boolean = Object.keys(exts).includes(file.name.split('.').pop());
 
   const [loading, setLoading] = useState(type === 'text' && popup);
 
-  if (type === 'text' && popup) {
+  if ((type === 'text' || shouldRenderMarkdown || shouldRenderTex || shouldRenderCode) && popup) {
     useEffect(() => {
       (async () => {
         const res = await fetch('/r/' + file.name);
@@ -66,13 +88,16 @@ export default function Type({ file, popup = false, disableMediaPreview, ...prop
     );
   };
 
-  if ((shouldRenderMarkdown || shouldRenderTex) && !props.overrideRender && popup)
+  if ((shouldRenderMarkdown || shouldRenderTex || shouldRenderCode) && !props.overrideRender && popup)
     return (
       <>
         {renderAlert()}
         <Card p='md' my='sm'>
           {shouldRenderMarkdown && <Markdown code={text} />}
           {shouldRenderTex && <KaTeX code={text} />}
+          {shouldRenderCode && !(shouldRenderTex || shouldRenderMarkdown) && (
+            <PrismCode code={text} ext={type} />
+          )}
         </Card>
       </>
     );
@@ -81,17 +106,28 @@ export default function Type({ file, popup = false, disableMediaPreview, ...prop
     return <Placeholder Icon={FileIcon} text={`Click to view file (${file.name})`} {...props} />;
   }
 
+  if (file.password) {
+    return (
+      <Placeholder
+        Icon={FileIcon}
+        text={`This file is password protected. Click to view file (${file.name})`}
+        onClick={() => window.open(file.url)}
+        {...props}
+      />
+    );
+  }
+
   return popup ? (
     media ? (
       {
-        video: <video width='100%' autoPlay controls {...props} />,
+        video: <video width='100%' autoPlay muted controls {...props} />,
         image: (
           <Image
             placeholder={<PlaceholderContent Icon={FileIcon} text={'Image failed to load...'} />}
             {...props}
           />
         ),
-        audio: <audio autoPlay controls {...props} style={{ width: '100%' }} />,
+        audio: <audio autoPlay muted controls {...props} style={{ width: '100%' }} />,
         text: (
           <>
             {loading ? (

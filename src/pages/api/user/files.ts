@@ -41,7 +41,9 @@ async function handler(req: NextApiReq, res: NextApiRes, user: UserExtended) {
 
       logger.info(`User ${user.username} (${user.id}) deleted an image ${file.name} (${file.id})`);
 
-      delete file.password;
+      // @ts-ignore
+      if (file.password) file.password = true;
+
       return res.json(file);
     }
   } else if (req.method === 'PATCH') {
@@ -57,7 +59,8 @@ async function handler(req: NextApiReq, res: NextApiRes, user: UserExtended) {
         },
       });
 
-    delete image.password;
+    // @ts-ignore
+    if (file.password) file.password = true;
     return res.json(image);
   } else {
     if (req.query.count) {
@@ -79,6 +82,7 @@ async function handler(req: NextApiReq, res: NextApiRes, user: UserExtended) {
       expiresAt: Date;
       maxViews: number;
       views: number;
+      size: number;
     }[] = await prisma.file.findMany({
       where: {
         userId: user.id,
@@ -96,6 +100,7 @@ async function handler(req: NextApiReq, res: NextApiRes, user: UserExtended) {
         favorite: true,
         views: true,
         maxViews: true,
+        size: true,
       },
     });
 
