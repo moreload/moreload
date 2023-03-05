@@ -15,9 +15,14 @@ import qogir_dark from 'lib/themes/qogir_dark';
 import { createEmotionCache, MantineProvider, MantineThemeOverride } from '@mantine/core';
 import { useColorScheme } from '@mantine/hooks';
 import { ModalsProvider } from '@mantine/modals';
-import { NotificationsProvider } from '@mantine/notifications';
+import { Notifications } from '@mantine/notifications';
+import { SpotlightProvider } from '@mantine/spotlight';
 import { userSelector } from 'lib/recoil/user';
 import { useRecoilValue } from 'recoil';
+
+import { createSpotlightActions } from 'lib/spotlight';
+import { useRouter } from 'next/router';
+import { IconSearch } from '@tabler/icons-react';
 
 export const themes = {
   system: (colorScheme: 'dark' | 'light') => (colorScheme === 'dark' ? dark_blue : light_blue),
@@ -52,6 +57,7 @@ const cache = createEmotionCache({ key: 'moreload' });
 export default function MoreLoadTheming({ Component, pageProps, ...props }) {
   const user = useRecoilValue(userSelector);
   const colorScheme = useColorScheme();
+  const router = useRouter();
 
   let theme: MantineThemeOverride;
 
@@ -78,8 +84,9 @@ export default function MoreLoadTheming({ Component, pageProps, ...props }) {
         components: {
           AppShell: {
             styles: (t) => ({
-              root: {
+              main: {
                 backgroundColor: t.other.AppShell_backgroundColor,
+                // backgroundColor: '#fff',
               },
             }),
           },
@@ -93,9 +100,14 @@ export default function MoreLoadTheming({ Component, pageProps, ...props }) {
           Modal: {
             defaultProps: {
               centered: true,
-              overlayBlur: 3,
-              overlayColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : 'white',
-              exitTransitionDuration: 100,
+              transitionProps: {
+                exitDuration: 100,
+              },
+              overlayProps: {
+                blur: 6,
+                color: theme.colorScheme === 'dark' ? theme.colors.dark[6] : 'white',
+              },
+              // scrollAreaComponent: Modal.NativeScrollArea,
             },
           },
           Popover: {
@@ -106,8 +118,10 @@ export default function MoreLoadTheming({ Component, pageProps, ...props }) {
           },
           LoadingOverlay: {
             defaultProps: {
-              overlayBlur: 3,
-              overlayColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : 'white',
+              overlayProps: {
+                blur: 3,
+                color: theme.colorScheme === 'dark' ? theme.colors.dark[6] : 'white',
+              },
             },
           },
           Loader: {
@@ -133,9 +147,14 @@ export default function MoreLoadTheming({ Component, pageProps, ...props }) {
       }}
     >
       <ModalsProvider>
-        <NotificationsProvider position='top-center' style={{ marginTop: -10 }}>
+        <SpotlightProvider
+          searchIcon={<IconSearch />}
+          shortcut={['mod + k', '/']}
+          actions={createSpotlightActions(router)}
+        >
+          <Notifications position='top-center' style={{ marginTop: -10 }} />
           {props.children ? props.children : <Component {...pageProps} />}
-        </NotificationsProvider>
+        </SpotlightProvider>
       </ModalsProvider>
     </MantineProvider>
   );
