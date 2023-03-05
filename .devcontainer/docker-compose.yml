@@ -19,3 +19,4 @@ services:
 
 volumes:
   pg_data:
+    
