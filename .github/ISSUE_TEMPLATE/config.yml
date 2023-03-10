@@ -1,5 +1,8 @@
 blank_issues_enabled: false
 contact_links:
+  - name: Feature Request
+    url: https://github.com/moreload/moreload/discussions/new?category=ideas&title=Your%20brief%20description%20here&labels=feature
+    about: Ask for a new feature
   - name: MoreLoad Discord
     url: https://dyonic.me/discord
     about: Ask for help with anything related to MoreLoad!
